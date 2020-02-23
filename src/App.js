@@ -1,22 +1,40 @@
 import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Header from './Header'
+import SideNav from './SideNav';
 import HomePage from './HomePage'
 import FolderPage from './FolderPage'
 import NotePage from './NotePage'
 import NotFoundPage from './NotFoundPage'
-// import './App.css'
+import STORE from './dummy-store';
+import './App.css'
 
 export default class App extends Component {
+  // Set state here
+  constructor(props) {
+    super(props)
+    this.state = {
+      notes: [STORE.notes],
+      folders: [STORE.folders]
+  };
+  }
+  // Add methods for updating state
+
   render() {
+    console.log(this.state.folders);
     return (
       <div className='App'>
         <Header />
+        <nav className="App_nav">
+          <SideNav folders={STORE.folders}/>
+        </nav>
+
         <main>
           <Switch>
+            {/* How can I pass props/state to components here?  */}
             <Route exact path="/" component={HomePage} />
-            <Route path='/folder' component={FolderPage} />
-            <Route path='/note' component={NotePage} />
+            <Route path='/folder/:id' component={FolderPage} />
+            <Route path='/note/:id' component={NotePage} />
             <Route component={NotFoundPage}/>
           </Switch>
         </main>

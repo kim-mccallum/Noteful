@@ -7,13 +7,15 @@ export default class NoteList extends Component {
       return <NoteItem className="noteItem" note={note} key={note.id}/>
     })
     return (
-      <div className='NoteList'>
+      <section className='NoteList_main'>
           {/* Pass the folder list to sidebar which will call Folder List and then FolderItem for each */}
           <ul>
             {notes}
           </ul>
-          <p>I will add an AddNote button here</p>
-      </div>
+          <button>
+            Add Note
+          </button>
+      </section>
     )
   }
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+// I DON'T THINK I'LL NEED THIS FILE
 export default class Note extends Component {
   render() {
     return (
