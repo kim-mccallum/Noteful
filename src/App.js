@@ -5,7 +5,6 @@ import HomePage from './HomePage'
 import FolderPage from './FolderPage'
 import NotePage from './NotePage'
 import NotFoundPage from './NotFoundPage'
-import STORE from './dummy-store'
 // import './App.css'
 
 export default class App extends Component {

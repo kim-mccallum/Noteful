@@ -4,7 +4,7 @@ export default class FolderItem extends Component {
   render() {
     return (
       <li className='FolderItem'>
-        {this.props.folder.name}
+        {this.props.folderName}
       </li>
     )
   }
