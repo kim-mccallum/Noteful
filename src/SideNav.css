@@ -1,5 +1,5 @@
-/* .NoteListNav_list {
-    list-style-type: none;
-    margin: 130px 0 0;
-    padding: 0;
+/* .App_nav {
+    grid-area: sidebar;
+    height: 100vh;
+    overflow: auto;
 } */

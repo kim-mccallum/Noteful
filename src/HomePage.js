@@ -1,14 +1,16 @@
 import React from 'react';
+import SideNav from './SideNav';
 import NoteList from './NoteList';
-import STORE from './dummy-store';
 
-export default function HomePage(){
-  // console.log(STORE.folders);
+export default function HomePage(props){
+    // console.log(props.store.folders);
     return (
       <>
-        <h1>Home Page</h1>
+        <nav className="App_nav">
+          <SideNav folders={props.store.folders}/>
+        </nav>
           {/* Pass the list of all notes to NoteList which will call NoteItem for each */}
-          <NoteList notes={STORE.notes}/>
+          <NoteList notes={props.store.notes}/>
       </>
     )
 }

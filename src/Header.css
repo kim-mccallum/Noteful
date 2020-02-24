@@ -1,9 +1,14 @@
-header{
+/* header{
     grid-column: 1 / span 2;
     background: #eaeaea;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 25px;
-  }
+  } */
 
+
+header,
+footer {
+  grid-column: 1 / span 2;
+}

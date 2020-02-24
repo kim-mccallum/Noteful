@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import FolderItem from './FolderItem'
+import './SideNav.css'
 
 export default class SideNav extends Component {
   render() {
