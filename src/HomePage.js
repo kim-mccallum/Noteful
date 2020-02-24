@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import SideNav from './SideNav';
+import React from 'react';
 import NoteList from './NoteList';
 import STORE from './dummy-store';
 

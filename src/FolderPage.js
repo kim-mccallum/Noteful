@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-// import SideNav from './SideNav';
 import NoteList from './NoteList';
 import STORE from './dummy-store';
 
 
 export default class FolderPage extends Component {
   render() {
+    // Use the match params to get the id
     const folderName = this.props.match.params.id;
-    
+    // console.log(folderName);
+    // Use find and filter methods to get the notes corresponding to the folder
     const folderId = STORE.folders.find(f => f.name === folderName).id;
+    // console.log(folderId);
     const notes = STORE.notes.filter(note => note.folderId === folderId);
-
-    // Change this to get the selected folder and render NoteList for only selected folders
     return (
       <>
         <h1>Folder Page</h1>

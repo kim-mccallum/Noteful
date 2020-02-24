@@ -10,7 +10,7 @@ import STORE from './dummy-store';
 import './App.css'
 
 export default class App extends Component {
-  // Set state here
+  // Set state here - Remove
   constructor(props) {
     super(props)
     this.state = {
@@ -18,7 +18,6 @@ export default class App extends Component {
       folders: [STORE.folders]
   };
   }
-  // Add methods for updating state?
 
   render() {
     console.log(this.state.folders);
