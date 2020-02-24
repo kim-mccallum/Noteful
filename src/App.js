@@ -18,7 +18,7 @@ export default class App extends Component {
       folders: [STORE.folders]
   };
   }
-  // Add methods for updating state
+  // Add methods for updating state?
 
   render() {
     console.log(this.state.folders);
@@ -31,7 +31,7 @@ export default class App extends Component {
 
         <main>
           <Switch>
-            {/* How can I pass props/state to components here?  */}
+            {/* How can I pass props/state to components here? routeProps!  */}
             <Route exact path="/" component={HomePage} />
             <Route path='/folder/:id' component={FolderPage} />
             <Route path='/note/:id' component={NotePage} />
