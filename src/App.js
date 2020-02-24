@@ -9,33 +9,34 @@ import STORE from './dummy-store';
 import './App.css'
 
 export default class App extends Component {
-  // Set state here - Use this later when the app is ready
-  constructor(props) {
-    super(props)
-    this.state = {
-      notes: [STORE.notes],
-      folders: [STORE.folders]
+  // Set state here - Use this later when the app is ready - Change this to fake 
+  state = {
+    notes: [],
+    folders: []
   };
-  }
 
+  componentDidMount() {
+      // fake date loading from API call
+      this.setState(STORE);
+  }
+  
   render() {
-    console.log(this.state.folders);
+    // console.log(this.state.folders);
     return (
       <div className='App'>
-        <Header />
-        <nav className="SideNav"></nav>
-
-        <main>
+        <>
+          <Header />
+        </>
+        <>
           <Switch>
             {/* Pass the props here as a component. Use a function that returns/renders a component */}
             {/* explicitly pass the props - off autopilot */}
-            <Route exact path="/" component={(routeProps) => <HomePage routeProps={routeProps} store={STORE}/>} />
-            <Route path='/folder/:id' component={(routeProps) => <FolderPage routeProps={routeProps} store={STORE} />} />
-            <Route path='/note/:id' component={(routeProps) => <NotePage routeProps={routeProps} store={STORE} />}/>
+            <Route exact path="/" component={routeProps => <HomePage routeProps={routeProps} store={STORE}/>} />
+            <Route path='/folder/:id' component={routeProps => <FolderPage routeProps={routeProps} store={STORE} />} />
+            <Route path='/note/:id' component={routeProps => <NotePage routeProps={routeProps} store={STORE} />}/>
             <Route component={NotFoundPage}/>
           </Switch>
-        </main>
-        <footer></footer>
+        </>
       </div>
     )
   }

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import './NoteItem.css'
 
-export default class NoteItem extends Component {
+class NoteItem extends Component {
   render() {
     return (
       <Link to={`/note/${this.props.note.name}`}>
@@ -15,4 +16,6 @@ export default class NoteItem extends Component {
       </Link>
     )
   }
-}
+};
+
+export default withRouter(NoteItem);

@@ -7,16 +7,17 @@ export default class SideNav extends Component {
     const folders = this.props.folders.map((folder) => {
       return <FolderItem className="FolderItem" folderName={folder.name} key={folder.id}/>
     });
+    // Use the props to add a custom class for styling the selected folder - className="FolderItem Selected"
     return (
-      <div className='SideNav'>
-          {/* Pass the folder list to sidebar which will call Folder List and then FolderItem for each */}
-          <ul className="NoteListNav_list">
-            {folders}
-          </ul>
-          <button>
-            Add folder
-          </button>
-      </div>
+      <>
+        {/* Pass the folder list to sidebar which will call Folder List and then FolderItem for each */}
+        <ul className="FolderNav_list">
+          {folders}
+        </ul>
+        <button className="addFolderBtn">
+          Add folder
+        </button>
+      </>
     )
   }
 }

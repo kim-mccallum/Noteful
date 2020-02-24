@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NotePageSideNav from './NotePageSideNav';
+import './NotePage.css'
 
 export default class NotePage extends Component {
   render() {
@@ -11,16 +12,18 @@ export default class NotePage extends Component {
 
     // find the folder name of the folder containing the note
     const folderName = this.props.store.folders.find(f => f.id === note[0].folderId).name;
-    console.log(folderName)
     return (
       <>
-        <NotePageSideNav folderName={folderName}/>
-        <h2>{note[0].name}</h2>
-        <p>{`Date modified: ${note[0].modified}`}</p>
-        <button className="NotePage_delete">
-          Delete Note
-        </button>
-        <p className="Note_text">{note[0].content}</p>
+        <NotePageSideNav folderName={folderName} {...this.props}/>
+        <section className="singleNoteSection">
+          <h2>{note[0].name}</h2>
+          <p>{`Date modified: ${note[0].modified}`}</p>
+          <button className="deleteNoteBtn">
+            Delete Note
+          </button>
+          <p className="Note_text">{note[0].content}</p>
+        </section>
+        
       </>
     )
   }

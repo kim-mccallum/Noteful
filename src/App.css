@@ -1,22 +1,7 @@
-body {
+.App {
     display: grid;
-    grid-template-columns: 75% 25%;
+    grid-template-columns: 25% 75%;
     grid-template-rows: 10vw 30vw 10vw;
     grid-gap: 1em;
   }
   
-body {
-    margin: 0 auto;
-    max-width: 56em;
-    padding: 1em 0;
-}
-
-header,
-main,
-.SideNav,
-footer {
-    background: #eaeaea;
-    display: flex;
-    /* align-items: center; */
-    justify-content: center;
-}

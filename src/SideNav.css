@@ -1,5 +1,20 @@
-/* .App_nav {
-    grid-area: sidebar;
-    height: 100vh;
-    overflow: auto;
-} */
+
+/* .FolderNav_list{
+    display: block;
+    width: 80%;
+    border: 1px solid gray;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;    
+}*/
+
+.addFolderBtn {
+    display: block;
+    width: 80%;
+    border: 1px solid gray;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+  } 
