@@ -10,7 +10,7 @@ import STORE from './dummy-store';
 import './App.css'
 
 export default class App extends Component {
-  // Set state here - Remove
+  // Set state here - Use this later when the app is ready
   constructor(props) {
     super(props)
     this.state = {
@@ -24,6 +24,7 @@ export default class App extends Component {
     return (
       <div className='App'>
         <Header />
+        {/* Call SideNav in the pages that need */}
         <nav className="App_nav">
           <SideNav folders={STORE.folders}/>
         </nav>
@@ -31,9 +32,13 @@ export default class App extends Component {
         <main>
           <Switch>
             {/* How can I pass props/state to components here? routeProps!  */}
+            {/* no custom props neeed */}
             <Route exact path="/" component={HomePage} />
-            <Route path='/folder/:id' component={FolderPage} />
-            <Route path='/note/:id' component={NotePage} />
+            {/* <Route path='/folder/:id' component={FolderPage} /> */}
+            <Route path='/folder/:id' component={(routeProps) => <FolderPage routeProps={routeProps} store={STORE} />} />
+            {/* Pass the props here as a component. Use a function that returns/renders a component */}
+            {/* explicitly pass the props - off autopilot */}
+            <Route path='/note/:id' component={(routeProps) => <NotePage routeProps={routeProps} notes={STORE.notes} />}/>
             <Route component={NotFoundPage}/>
           </Switch>
         </main>

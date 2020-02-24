@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import NoteList from './NoteList';
-import STORE from './dummy-store';
 
 export default class NotePage extends Component {
   render() {
     // Use the match params to get the id
-    const noteName = this.props.match.params.id;
-    // console.log(noteName);
-    const noteId = STORE.notes.find(n => n.name === noteName).id;
-    // console.log(noteId);
-    const notes = STORE.notes.filter(note => note.id === noteId);
+    const noteName = this.props.routeProps.match.params.id;
+    const noteId = this.props.notes.find(n => n.name === noteName).id;
+    const notes = this.props.notes.filter(note => note.id === noteId);
+    // Always 1 item - Do something with this
     console.log(notes.length);
     return (
       <>
