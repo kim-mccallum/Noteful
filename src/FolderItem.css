@@ -7,9 +7,11 @@
     font-size: 16px;
     cursor: pointer;
     text-align: center;
+    text-decoration: none;
 }
 
 .active{
-    background-color: red;
+    font-weight: bold;
+    color: darkmagenta;
 }
 

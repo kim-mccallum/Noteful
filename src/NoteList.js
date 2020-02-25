@@ -12,10 +12,10 @@ export default class NoteList extends Component {
       <section className='NoteList_main'>
           <ul>
             {notes}
+            <button className="addNoteBtn">
+              Add Note
+            </button>
           </ul>
-          <button className="addNoteBtn">
-            Add Note
-          </button>
       </section>
     )
   }
