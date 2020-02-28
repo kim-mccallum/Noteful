@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import NotePageSideNav from './NotePageSideNav';
 import './NotePage.css'
 
+// Refactor to be functional component
+// Implement the delete button on the note page, if the delete is successful, redirect to the / path.
 export default class NotePage extends Component {
   render() {
     // Use the match params to get the id

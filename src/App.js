@@ -6,23 +6,35 @@ import FolderPage from './FolderPage'
 import NotePage from './NotePage'
 import NotFoundPage from './NotFoundPage'
 import STORE from './dummy-store';
+import NotefulContext from './NotefulContext';
 import './App.css'
 
 export default class App extends Component {
-  // Set state here - Use this later when the app is ready - Change this to fake 
+  // Set state here - Use this later when the app is ready 
   state = {
     notes: [],
     folders: []
   };
 
+  // Get the data from the API and use setState to reset
   componentDidMount() {
+      // Implement 2 fetch request to 2 endpoints 
+      const folderURL = 'http://localhost:9090/folders'
+      const noteURL = 'http://localhost:9090/notes'
       // fake date loading from API call
       this.setState(STORE);
   }
-  
+
+  // DELETE note request should make a request to /notes/<note-id> - likely needs headers
+  deleteHandler = () => {
+    //add the logic ot delete 
+    // If it's a note do one thing, if it's a note delete that
+  }
+
   render() {
-    // console.log(this.state.folders);
+    // create value object here
     return (
+      // Provider
       <div className='App'>
         <>
           <Header />
@@ -38,6 +50,7 @@ export default class App extends Component {
           </Switch>
         </>
       </div>
+      // Provider
     )
   }
 }

@@ -1,7 +1,7 @@
 
-.addFolderBtn, .addFolderBtn {
+.addFolderBtn {
     display: block;
-    width: 80%;
+    width: 100%;
     border: 1px solid gray;
     padding: 14px 28px;
     font-size: 16px;

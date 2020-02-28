@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import NoteItem from './NoteItem'
 import './NoteList.css'
 
+// Refactor to be a functional component
 export default class NoteList extends Component {
   render() {
       const notes = this.props.notes.map((note) => {

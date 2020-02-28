@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom';
 import './NoteItem.css'
 
+// Refactor to be a functional component and implement DELETE button
 class NoteItem extends Component {
   render() {
     return (
