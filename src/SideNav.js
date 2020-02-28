@@ -2,9 +2,8 @@ import React, { Component } from 'react'
 import FolderItem from './FolderItem'
 import './SideNav.css'
 
-export default class SideNav extends Component {
-  render() {
-    const folders = this.props.folders.map((folder) => {
+export default function SideNav(props){
+    const folders = props.folders.map((folder) => {
       return <FolderItem className="FolderItem" folderName={folder.name} key={folder.id}/>
     });
     // Use the props to add a custom class for styling the selected folder - className="FolderItem Selected"
@@ -19,5 +18,4 @@ export default class SideNav extends Component {
         </ul>
       </>
     )
-  }
 }

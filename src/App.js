@@ -21,20 +21,44 @@ export default class App extends Component {
       // Implement 2 fetch request to 2 endpoints 
       const folderURL = 'http://localhost:9090/folders'
       const noteURL = 'http://localhost:9090/notes'
-      // fake date loading from API call
-      this.setState(STORE);
+      Promise.all([
+        fetch(noteURL),
+        fetch(folderURL),
+      ])
+      .then(([notesRes, foldersRes]) => {
+        if (!notesRes.ok){
+          // ?? WHAT IS HAPPENING IN HERE? 
+          return notesRes.json().then(e => Promise.reject(e));
+        }
+        if (!foldersRes.ok){
+          return foldersRes.json().then(e => Promise.reject(e));
+        }
+        return Promise.all([notesRes.json(), foldersRes.json()]);
+      })
+      .then(([notes, folders]) => {
+        // console.log(`these are called notes but they are folders. Order matters?`, notes)
+        // console.log(folders)
+        this.setState({
+          notes:notes, 
+          folders:folders
+        })
+      })
+      .catch(err => {
+        console.log(`Handling the error here: ${err}`)
+      })
   }
 
   // DELETE note request should make a request to /notes/<note-id> - likely needs headers
   deleteHandler = () => {
-    //add the logic ot delete 
+    //add the logic to delete 
     // If it's a note do one thing, if it's a note delete that
   }
 
   render() {
-    // create value object here
+    console.log(this.state)
+    // create value object from context here
     return (
-      // Provider
+      // Provider - Wrap everything 
       <div className='App'>
         <>
           <Header />
