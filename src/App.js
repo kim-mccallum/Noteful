@@ -5,7 +5,6 @@ import HomePage from './HomePage'
 import FolderPage from './FolderPage'
 import NotePage from './NotePage'
 import NotFoundPage from './NotFoundPage'
-import STORE from './dummy-store';
 import NotefulContext from './NotefulContext';
 import './App.css'
 
@@ -26,8 +25,7 @@ export default class App extends Component {
         fetch(folderURL),
       ])
       .then(([notesRes, foldersRes]) => {
-        if (!notesRes.ok){
-          // ?? WHAT IS HAPPENING IN HERE? 
+        if (!notesRes.ok){ 
           return notesRes.json().then(e => Promise.reject(e));
         }
         if (!foldersRes.ok){
@@ -36,8 +34,6 @@ export default class App extends Component {
         return Promise.all([notesRes.json(), foldersRes.json()]);
       })
       .then(([notes, folders]) => {
-        // console.log(`these are called notes but they are folders. Order matters?`, notes)
-        // console.log(folders)
         this.setState({
           notes:notes, 
           folders:folders
@@ -55,8 +51,8 @@ export default class App extends Component {
   }
 
   render() {
-    console.log(this.state)
     // create value object from context here
+    console.log(NotefulContext);
     return (
       // Provider - Wrap everything 
       <div className='App'>
@@ -67,9 +63,9 @@ export default class App extends Component {
           <Switch>
             {/* Pass the props here as a component. Use a function that returns/renders a component */}
             {/* explicitly pass the props - off autopilot */}
-            <Route exact path="/" component={routeProps => <HomePage routeProps={routeProps} store={STORE}/>} />
-            <Route path='/folder/:id' component={routeProps => <FolderPage routeProps={routeProps} store={STORE} />} />
-            <Route path='/note/:id' component={routeProps => <NotePage routeProps={routeProps} store={STORE} />}/>
+            <Route exact path="/" component={routeProps => <HomePage routeProps={routeProps} store={this.state}/>} />
+            <Route path='/folder/:id' component={routeProps => <FolderPage routeProps={routeProps} store={this.state} />} />
+            <Route path='/note/:id' component={routeProps => <NotePage routeProps={routeProps} store={this.state} />}/>
             <Route component={NotFoundPage}/>
           </Switch>
         </>
