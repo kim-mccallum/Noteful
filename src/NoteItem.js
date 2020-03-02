@@ -36,20 +36,20 @@ function NoteItem(props) {
     return (
       <NotefulContext.Consumer>
         {(context) => (
-            <Link to={`/note/${props.note.id}`}>
-              <li className='NoteItem'>
+            <li className='NoteItem'>
+              <Link to={`/note/${props.note.id}`}>
                 <h2>{props.note.name}</h2>
-                <p>{props.note.modified}</p>
-                <button onClick={() => {
-                      deleteNoteRequest(
-                        props.note.id,
-                        context.deleteNoteHandler,
-                      )
-                }}>
-                  Delete
-                </button>
-              </li>
-            </Link>
+              </Link>
+              <p>{props.note.modified}</p>
+              <button onClick={() => {
+                    deleteNoteRequest(
+                      props.note.id,
+                      context.deleteNoteHandler,
+                    )
+              }}>
+                Delete
+              </button>
+            </li>
         )}
     </NotefulContext.Consumer>
 )};
