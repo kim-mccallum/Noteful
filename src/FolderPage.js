@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import SideNav from './SideNav';
 import NoteList from './NoteList';
 

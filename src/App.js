@@ -9,7 +9,6 @@ import NotefulContext from './NotefulContext';
 import './App.css'
 
 export default class App extends Component {
-  // Set state here - Use this later when the app is ready 
   state = {
     notes: [],
     folders: []
@@ -44,33 +43,45 @@ export default class App extends Component {
       })
   }
 
-  // DELETE note request should make a request to /notes/<note-id> - likely needs headers
-  deleteHandler = () => {
-    //add the logic to delete 
-    // If it's a note do one thing, if it's a note delete that
+  // Called by the Delete Request in NoteItem
+  deleteNoteHandler = noteId => {
+    console.log(noteId)
+    // logic to delete - Later make the fn handle notes and folders - If it's a note do one thing, if it's a folder do the other
+    const newNotes = this.state.notes.filter(note =>
+      note.id !== noteId)
+    this.setState({
+      notes: newNotes
+    })
   }
 
   render() {
-    // create value object from context here
     console.log(NotefulContext);
+    // create value object from context here
+    const contextValue = {
+      folders: this.state.folders,
+      notes: this.state.notes,
+      deleteNoteHandler: this.deleteNoteHandler
+    }
     return (
-      // Provider - Wrap everything 
-      <div className='App'>
-        <>
-          <Header />
-        </>
-        <>
-          <Switch>
-            {/* Pass the props here as a component. Use a function that returns/renders a component */}
-            {/* explicitly pass the props - off autopilot */}
-            <Route exact path="/" component={routeProps => <HomePage routeProps={routeProps} store={this.state}/>} />
-            <Route path='/folder/:id' component={routeProps => <FolderPage routeProps={routeProps} store={this.state} />} />
-            <Route path='/note/:id' component={routeProps => <NotePage routeProps={routeProps} store={this.state} />}/>
-            <Route component={NotFoundPage}/>
-          </Switch>
-        </>
-      </div>
-      // Provider
+      // Provider - Wrap everything up so that the descendents can access
+      <NotefulContext.Provider
+        value={contextValue}>
+        <div className='App'>
+          <>
+            <Header />
+          </>
+          <>
+            <Switch>
+              {/* Pass the props here as a component. Use a function that returns/renders a component */}
+              {/* explicitly pass the props - off autopilot */}
+              <Route exact path="/" component={routeProps => <HomePage routeProps={routeProps} store={this.state}/>} />
+              <Route path='/folder/:id' component={routeProps => <FolderPage routeProps={routeProps} store={this.state} />} />
+              <Route path='/note/:id' component={routeProps => <NotePage routeProps={routeProps} store={this.state} />}/>
+              <Route component={NotFoundPage}/>
+            </Switch>
+          </>
+        </div>
+      </NotefulContext.Provider>
     )
   }
 }

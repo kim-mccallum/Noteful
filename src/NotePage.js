@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import NotePageSideNav from './NotePageSideNav';
 import './NotePage.css'
 
@@ -7,24 +7,25 @@ import './NotePage.css'
 export default function NotePage(props){
     // Use the match params to get the id
     const noteName = props.routeProps.match.params.id;
-    const noteId = props.store.notes.find(n => n.name === noteName).id;
-    // note is an array of 1
-    const note = props.store.notes.filter(note => note.id === noteId);
 
+    const note = props.store.notes.find(note => note.name === noteName);
     // find the folder name of the folder containing the note
-    const folderName = props.store.folders.find(f => f.id === note[0].folderId).name;
+    const folder = props.store.folders.find(f => f.id === note.folderId);
+
     return (
+      // DISCUSS WITH JORGE - How React works and why things are undefined the first time
+      // I've add conditional logic to deal with the fact that things are undefined on the first render
       <>
-        <NotePageSideNav folderName={folderName} {...props}/>
+        <NotePageSideNav folderName={folder ? folder.name : ''} {...props}/>
         <section className="singleNoteSection">
-          <h2>{note[0].name}</h2>
-          <p>{`Date modified: ${note[0].modified}`}</p>
-          <button className="deleteNoteBtn">
-            Delete Note
-          </button>
-          <p className="Note_text">{note[0].content}</p>
-        </section>
-        
+              <h2>{note ? note.name : ''}</h2>
+              <p>{`Date modified: ${note ? note.modified : ''}`}</p>
+              <button className="deleteNoteBtn">
+                Delete Note
+              </button>
+              <p className="Note_text">{note ? note.content: ''}</p>
+
+        </section>       
       </>
     )
 }
