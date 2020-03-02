@@ -4,7 +4,8 @@ import './SideNav.css'
 
 export default function SideNav(props){
     const folders = props.folders.map((folder) => {
-      return <FolderItem className="FolderItem" folderName={folder.name} key={folder.id}/>
+      // return <FolderItem className="FolderItem" folderName={folder.name} key={folder.id}/>
+      return <FolderItem className="FolderItem" id={folder.id} key={folder.id} name={folder.name}/>
     });
     // Use the props to add a custom class for styling the selected folder - className="FolderItem Selected"
     return (

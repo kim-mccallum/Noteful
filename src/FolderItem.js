@@ -5,7 +5,8 @@ import './FolderItem.css'
 export default function FolderItem(props){
     return (
       <li className='FolderItem'>
-        <NavLink exact to={`/folder/${props.folderName}`}>{props.folderName}</NavLink>
+        {/* <NavLink exact to={`/folder/${props.folderName}`}>{props.folderName}</NavLink> */}
+        <NavLink to={`/folder/${props.id}`}>{props.name}</NavLink>
       </li>
     )
 }

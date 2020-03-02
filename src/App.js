@@ -55,7 +55,6 @@ export default class App extends Component {
   }
 
   render() {
-    console.log(NotefulContext);
     // create value object from context here
     const contextValue = {
       folders: this.state.folders,
