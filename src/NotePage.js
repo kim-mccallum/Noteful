@@ -1,27 +1,41 @@
 import React from 'react';
 import NotePageSideNav from './NotePageSideNav';
+import NotefulContext from './NotefulContext';
 import './NotePage.css'
 
-// Implement the delete button on the note page, if the delete is successful, redirect to the / path.
 export default function NotePage(props){
+    const { routeProps, store } = props;
+    const { routeProps: {match:{params:{id}}}} = props;
+
     // Use the match params to get the id and look up the folder and note
-    const noteId = props.routeProps.match.params.id;
+    const noteId = id;
+    console.log(noteId)
     const note = props.store.notes.find(item => item.id === noteId);
     const folder = props.store.folders.find(f => f.id === note.folderId);
 
     return (
-      // DISCUSS - How React works and why things are undefined the first time
-      // Ray Smith helped me and though I understand the syntax, I don't understand why we have to add conditional logic to deal with undef'd
+      <NotefulContext.Consumer>
+      {(context) => (
       <>
         <NotePageSideNav folderName={folder ? folder.name : ''} {...props}/>
         <section className="singleNoteSection">
           <h2>{note ? note.name : ''}</h2>
           <p>{`Date modified: ${note ? note.modified : ''}`}</p>
-          <button className="deleteNoteBtn">
-            Delete Note
+          <button onClick={(e) => {
+            // Stop the reload
+            e.preventDefault();
+            context.deleteNoteHandler(
+              noteId
+            )
+            // send you back to URL 
+            routeProps.history.push('/')
+          }}>
+            Delete
           </button>
           <p className="Note_text">{note ? note.content: ''}</p>
         </section>       
       </>
+    )}
+    </NotefulContext.Consumer>
     )
 }

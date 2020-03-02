@@ -45,13 +45,35 @@ export default class App extends Component {
 
   // Called by the Delete Request in NoteItem
   deleteNoteHandler = noteId => {
-    console.log(noteId)
-    // logic to delete - Later make the fn handle notes and folders - If it's a note do one thing, if it's a folder do the other
-    const newNotes = this.state.notes.filter(note =>
-      note.id !== noteId)
-    this.setState({
-      notes: newNotes
-    })
+    // DELETE note request should make a request to /notes/<note-id>
+    // HELP ME UNDERSTAND/FIX THIS FUNCTION
+    fetch(`http://localhost:9090/notes/${noteId}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json',
+      }
+      })
+      .then(res => {
+        if (!res.ok) {
+          // get the error message from the response,
+          return res.json().then(error => {
+            // then throw it
+            throw error
+          })
+        }
+        return res.json()
+      })
+      .then(data => {
+        // logic to delete - Later make the fn handle notes and folders - If it's a note do one thing, if it's a folder do the other
+        const newNotes = this.state.notes.filter(note =>
+          note.id !== noteId)
+        this.setState({
+          notes: newNotes
+        })
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
 
   render() {
