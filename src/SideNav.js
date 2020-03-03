@@ -13,9 +13,11 @@ export default function SideNav(props){
         {/* Pass the folder list to sidebar which will call Folder List and then FolderItem for each */}
         <ul className="FolderNav_list">
           {folders}
-          <button className="addFolderBtn">
-            Add Folder
-          </button>
+          <li className="AddFolderItem">
+            <button className="addFolderBtn">
+              Add Folder
+            </button>
+          </li>
         </ul>
       </>
     )

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import NotefulContext from './NotefulContext';
 import './NoteItem.css'
 
-// implement DELETE button
 function NoteItem(props) {
     return (
       <NotefulContext.Consumer>
