@@ -27,7 +27,7 @@ export default function NotePage(props){
             context.deleteNoteHandler(
               noteId
             )
-            // send you back to URL 
+            // send you back to the home URL 
             routeProps.history.push('/')
           }}>
             Delete

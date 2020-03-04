@@ -4,6 +4,7 @@ import NotefulContext from './NotefulContext';
 import './NoteItem.css'
 
 function NoteItem(props) {
+    const date = props.note.modified.split('T')[0]
     return (
       <NotefulContext.Consumer>
         {(context) => (
@@ -11,7 +12,7 @@ function NoteItem(props) {
               <Link to={`/note/${props.note.id}`}>
                 <h2>{props.note.name}</h2>
               </Link>
-              <p>{props.note.modified}</p>
+              <p>{`Date modified: ${date}`}</p>
               <button onClick={() => {
                     context.deleteNoteHandler(
                       props.note.id

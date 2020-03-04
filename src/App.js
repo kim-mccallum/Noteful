@@ -84,7 +84,7 @@ export default class App extends Component {
       deleteNoteHandler: this.deleteNoteHandler
     }
     return (
-      // Provider - Wrap everything up so that the descendents can access
+      // Provider - Wrap everything up so that the descendents have access
       <NotefulContext.Provider
         value={contextValue}>
         <div className='App'>
@@ -94,10 +94,11 @@ export default class App extends Component {
           <>
             <Switch>
               {/* Pass the props here as a component. Use a function that returns/renders a component */}
-              {/* explicitly pass the props - off autopilot */}
+              {/* explicitly pass the props - "off autopilot" */}
               <Route exact path="/" component={routeProps => <HomePage routeProps={routeProps} store={this.state}/>} />
               <Route path='/folder/:id' component={routeProps => <FolderPage routeProps={routeProps} store={this.state} />} />
               <Route path='/note/:id' component={routeProps => <NotePage routeProps={routeProps} store={this.state} />}/>
+              {/* ADD NEW ROUTES FOR ADDFOLDER AND ADD NOTE FORM VIEWS??? */}
               <Route component={NotFoundPage}/>
             </Switch>
           </>

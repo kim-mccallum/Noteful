@@ -1,24 +1,16 @@
 
 .AddFolderItem{
   list-style: none;
-  width: 100%;
-  border: 1px solid gray;
-  /* padding: 14px 28px; */
-  margin-bottom: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  margin-left: -15px
 }
 
 .addFolderBtn {
-    /* display: block; */
-    padding: 8px 25px;
-    border: 1px solid gray;
-    font-size: 16px;
-    cursor: pointer;
-    text-align: center;
-    list-style: none;
+  display: block;
+  padding: 11px 22px;
+  border: 1px solid gray;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  list-style: none;
+  width: 100%;
   } 
 
