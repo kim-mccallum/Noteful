@@ -1,62 +1,45 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+// import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import NotefulContext from '../NotefulContext';
 
-export default class AddFolder extends Component {
-    // Initialize state for folder item
-    constructor(props) {
-        super(props);
-        this.state = {
-          name: "",
-          id: "",
-        };
-      }
-    // Methods to set the state (name, id)
-    nameChanged(name) {
-    this.setState({
-        name
-    });
-    }
-    // HOW DO I GENERATE THE ID? 
-    idChanged(id) {
-    this.setState({
-        id
-    });
-    }
-    // Method to handle the form submission - POST to the API
-    handleSubmit(){
+// Change this to functional compoent
+export default function AddFolder(props) {
+    // Just two things in the form - Folder name input and Submit button
+    return (
+        <NotefulContext.Consumer>
+            {(context) => (
+            <div className="addFolder">
+                <h2>Add Folder</h2>
+                {/* { error } */}
+                {/* get the routeProps.handleSubmitFolder */}
+                <form className="addFolderForm" onSubmit={() => {
+                    context.handleSubmitFolder(
+                        // Get the folder name from the form here and pass it
+                      "testing"
+                    )
+                    }}>
+                    <label htmlFor="folderName">Folder name:</label>
+                    <input 
+                        type="text" 
+                        name="folderName" 
+                        id="folderName" 
+                        placeholder="folder name"/>
 
-    }
+                    <div className="addFolderBtn">
+                        <button onClick={(e) => {
+                            // Stop the reload
+                            e.preventDefault();
+                            // send you back to the home URL 
+                            props.routeProps.history.push('/')
+                        }}>Cancel</button>
 
-    render() {
-        return (
-      <div className="addbookmark">
-        <h2>Add Bookmark</h2>
-        { error }
-        <form className="addFolderForm" onSubmit={e => this.handleSubmit(e)}>
-          <label htmlFor="folderName">Folder name:</label>
-          <input 
-            type="text" 
-            name="folderName" 
-            id="folderName" 
-            placeholder="folder name"
-            value={this.state.name}
-            onChange={e => this.idChanged(e.target.value)}/>
-
-            {/* SHOULD I HAVE AN INPUT FOR ID OR GENERATE A UNIQUE ONE SOMEHOW? */}
-          <label htmlFor="folderId">Folder ID:</label>  
-          <input 
-            type="text" 
-            name="folderId" 
-            id="folderId" 
-            placeholder="folderId"
-            value={this.state.url}
-            onChange={e => this.urlChanged(e.target.value)}/>
-
-          <div className="addFolderBtn">
-            <button onClick={e => this.props.showForm(false)}>Cancel</button>
-            <button type="submit" >Save</button>
-          </div>  
-        </form>
-      </div>
-        )
-    }
+                        {/* ATTACH A LISTENER HERE TO THIS? NOT NECESSARY SINCE I HAVE AN ONSUBMIT LISTENER ABOVE??? */}
+                        <button type="submit" >Save</button>
+                    </div>  
+                </form>
+            </div>
+            )}
+    </NotefulContext.Consumer>
+    )
 }

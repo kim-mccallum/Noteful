@@ -4,6 +4,7 @@ import Header from './Header'
 import HomePage from './HomePage'
 import FolderPage from './FolderPage'
 import NotePage from './NotePage'
+import AddFolder from './AddFolder/AddFolder'
 import NotFoundPage from './NotFoundPage'
 import NotefulContext from './NotefulContext';
 import './App.css'
@@ -43,7 +44,7 @@ export default class App extends Component {
       })
   }
 
-  // Called by the Delete Request in NoteItem
+  // Called by in NoteItem
   deleteNoteHandler = noteId => {
     // DELETE note request should make a request to /notes/<note-id>
     // HELP ME UNDERSTAND/FIX THIS FUNCTION
@@ -75,6 +76,11 @@ export default class App extends Component {
         console.log(error)
       })
   }
+  // Method to add a new folder form submission - make POST request in here - called by AddFolder
+  // fetch request and then the API will give us an id. I will have to figure out how to pass the id back to??
+  handleSubmitFolder = folderName => {
+    console.log(`Here is your folder: ${folderName}`)
+  }
 
   render() {
     // create value object from context here
@@ -98,7 +104,9 @@ export default class App extends Component {
               <Route exact path="/" component={routeProps => <HomePage routeProps={routeProps} store={this.state}/>} />
               <Route path='/folder/:id' component={routeProps => <FolderPage routeProps={routeProps} store={this.state} />} />
               <Route path='/note/:id' component={routeProps => <NotePage routeProps={routeProps} store={this.state} />}/>
-              {/* ADD NEW ROUTES FOR ADDFOLDER AND ADD NOTE FORM VIEWS??? */}
+              {/* ADD NEW ROUTES FOR ADDFOLDER AND ADDNOTE FORM VIEWS */}
+              {/* Pass the functions to add folders/notes as props */}
+              <Route path='/add-folder' component={routeProps => <AddFolder routeProps={routeProps} store={this.state} />} />
               <Route component={NotFoundPage}/>
             </Switch>
           </>

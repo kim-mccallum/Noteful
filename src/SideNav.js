@@ -1,5 +1,6 @@
 import React from 'react';
 import FolderItem from './FolderItem'
+import { NavLink } from 'react-router-dom';
 import './SideNav.css'
 
 export default function SideNav(props){
@@ -13,9 +14,8 @@ export default function SideNav(props){
           {folders}
           <li className="AddFolderItem">
             {/* HOW TO WIRE THIS BTN UP TO LINK TO AddFolder component? */}
-            <button className="addFolderBtn">
-              Add Folder
-            </button>
+            {/* Use Link to got to AddFolder form */}
+            <NavLink to={`/add-folder`}>Add Folder</NavLink>
           </li>
         </ul>
       </>

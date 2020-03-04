@@ -12,7 +12,9 @@ export default function NotePage(props){
     console.log(noteId)
     const note = props.store.notes.find(item => item.id === noteId);
     const folder = props.store.folders.find(f => f.id === note.folderId);
-
+    // How can I split the date up when it's undefined on the first render?
+    // const date = props.note.modified.split('T')[0];
+    
     return (
       <NotefulContext.Consumer>
       {(context) => (
