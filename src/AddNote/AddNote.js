@@ -14,12 +14,14 @@ export default class AddNote extends Component {
 
     // Controlled form - just changes state from input itself
     inputHandler = (e) => {
+        console.log('look at the target', e.target)
         // use square brackets for dynamic key name - make the names match!
         this.setState({
             [e.target.name]:e.target.value,
         })
     }
     render() {
+        // CREATE A LIST OF OPTIONS FROM THE FOLDERS
         return (
             <NotefulContext.Consumer>
                 {(context) => (
@@ -30,16 +32,26 @@ export default class AddNote extends Component {
                         e.preventDefault();
                         context.handleSubmitNote(
                             // Pass the entire state object?
-                            this.state.folderName
+                            this.state
                         )
                         this.props.routeProps.history.push('/')
                         }}>
-                        {/* MAKE THIS A SELECT MENU AND USE LOGIC TO GET THE FOLDER NAMES AND MATCH TO THE FOLDER ID */}
-                        {/* FOLDER */}
+                        {/* A SELECT MENU WITH ATTRIBUTES TO MATCH TO THE FOLDER ID -HARDCODE NOW BUT GET FOLDERS FROM CONTEXT AND MAP */}
+                        <label>
+                            Select a folder 
+                            <select>
+                                {/* <option name="folderId" value="111-222">Folder1</option>
+                                <option name="folderId">Folder2</option> */}
+                                {context.folders.map(fldr => {
+                                    return `<option name=${fldr.id}>${fldr.name}</option>`
+                                })}
+                            </select>
+                        </label>
 
                         {/* GET CURRENT TIME/DATE MODIFIED - LIKELY IN THE FUNCTION NOT HERE */}
 
                         {/* NOTE NAME */}
+                        <br></br>
                         <label htmlFor="name">Note name:</label>
                         <input 
                             type="text" 
@@ -65,7 +77,7 @@ export default class AddNote extends Component {
                                 this.props.routeProps.history.goBack()
                             }}>Cancel</button>
 
-                            <button type="submit" >Save</button>
+                            <button type="submit">Save Note</button>
                         </div>  
                     </form>
                 </div>
