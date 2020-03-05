@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import NotefulContext from '../NotefulContext';
 
-// Does this have to be an RCC?? Nope - No state or lifecycle methods required
 export default class AddFolder extends Component {
     state = {
         folderName: ''
     };
-
 
     // Controlled form - just changes state from input itself
     inputHandler = (e) => {
@@ -15,8 +13,7 @@ export default class AddFolder extends Component {
     }
 
    render() {
-    // Just two things in the form - Folder name input and Submit button
-    console.log(this.state);
+    // console.log(this.state);
     return (
             <NotefulContext.Consumer>
                 {(context) => (

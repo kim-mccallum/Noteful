@@ -4,8 +4,9 @@ import Header from './Header'
 import HomePage from './HomePage'
 import FolderPage from './FolderPage'
 import NotePage from './NotePage'
-import AddFolder from './AddFolder/AddFolder'
-import NotFoundPage from './NotFoundPage'
+import AddFolder from './AddFolder/AddFolder';
+import AddNote from './AddNote/AddNote';
+import NotFoundPage from './NotFoundPage';
 import NotefulContext from './NotefulContext';
 import './App.css'
 
@@ -34,7 +35,7 @@ export default class App extends Component {
         return Promise.all([notesRes.json(), foldersRes.json()]);
       })
       .then(([notes, folders]) => {
-        console.log(folders);
+        // console.log(folders);
         this.setState({
           notes:notes, 
           folders:folders
@@ -44,34 +45,61 @@ export default class App extends Component {
         console.log(`Handling the error here: ${err}`)
       })
   }
-    // Method to add a new folder form submission - make POST request in here - called by AddFolder
-    // fetch request and then the API will give us an id. I will have to figure out how to pass the id back to??
-    handleSubmitFolder = folderName => {
-      fetch(`http://localhost:9090/folders`, {
-      method: 'POST',
-      headers: {
-          'content-type': 'application/json'
-      },
-      body: JSON.stringify({name:folderName})
-      })
-      .then(res => {
-        // success/error message?
-        console.log(res);
-        return res.json()
-      })
-      .then(response => {
-        console.log(response)
-        let newState = this.state.folders;
-        newState.push({name:folderName, id:response.id})
-        this.setState({folders: newState})
-      })
-      .catch(err => console.log(err))
-  }
+  // Method to add a new folder form submission - make POST request in here - called by AddFolder
+  handleSubmitFolder = folderName => {
+    fetch(`http://localhost:9090/folders`, {
+    method: 'POST',
+    headers: {
+        'content-type': 'application/json'
+    },
+    body: JSON.stringify({name:folderName})
+    })
+    .then(res => {
+      // success/error message?
+      console.log(res);
+      return res.json()
+    })
+    .then(response => {
+      console.log(response)
+      let newState = this.state.folders;
+      newState.push({name:folderName, id:response.id})
+      this.setState({folders: newState})
+    })
+    .catch(err => console.log(err))
+    }
+  // Method to add a new folder form submission - make POST request in here - called by AddFolder
+  handleSubmitNote = noteObject => {
+    fetch(`http://localhost:9090/notes`, {
+    method: 'POST',
+    headers: {
+        'content-type': 'application/json'
+    },
+    // Change this to get all the attributes
+    body: JSON.stringify({
+      id: noteObject.id,
+      name: noteObject.name,
+      modified: noteObject.modified,
+      folderId: noteObject.folderId,
+      content: noteObject.content
+    })
+    })
+    .then(res => {
+      // success/error message?
+      console.log(res);
+      return res.json()
+    })
+    .then(response => {
+      console.log(response)
+      // // THIS NEEDS TO CHANGE AS I'M PUSHING A WHOLE OBJECT
+      // let newState = this.state.notes;
+      // newState.push({name:folderName, id:response.id})
+      // this.setState({folders: newState})
+    })
+    .catch(err => console.log(err))
+    }
 
   // Called by in NoteItem
   deleteNoteHandler = noteId => {
-    // DELETE note request should make a request to /notes/<note-id>
-    // HELP ME UNDERSTAND/FIX THIS FUNCTION
     fetch(`http://localhost:9090/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
@@ -108,7 +136,8 @@ export default class App extends Component {
       folders: this.state.folders,
       notes: this.state.notes,
       deleteNoteHandler: this.deleteNoteHandler, 
-      handleSubmitFolder: this.handleSubmitFolder
+      handleSubmitFolder: this.handleSubmitFolder,
+      handleSubmitNote: this.handleSubmitNote
     }
     return (
       // Provider - Wrap everything up so that the descendents have access
@@ -127,7 +156,8 @@ export default class App extends Component {
               <Route path='/note/:id' component={routeProps => <NotePage routeProps={routeProps} store={this.state} />}/>
               {/* ADD NEW ROUTES FOR ADDFOLDER AND ADDNOTE FORM VIEWS */}
               {/* Pass the functions to add folders/notes as props */}
-              <Route path='/add-folder' component={routeProps => <AddFolder routeProps={routeProps} store={this.state} />} />
+              <Route path='/add-folder' component={routeProps => <AddFolder routeProps={routeProps} />} />
+              <Route path='/add-note' component={routeProps => <AddNote routeProps={routeProps} />} />
               <Route component={NotFoundPage}/>
             </Switch>
           </>
