@@ -22,7 +22,7 @@ export default function NotePage(props){
         <NotePageSideNav folderName={folder ? folder.name : ''} {...props}/>
         <section className="singleNoteSection">
           <h2>{note ? note.name : ''}</h2>
-          <p>{`Date modified: ${note ? note.modified : ''}`}</p>
+          <p>{`Date modified: ${note ? note.modified.split('T')[0] : ''}`}</p>
           <button onClick={(e) => {
             // Stop the reload
             e.preventDefault();

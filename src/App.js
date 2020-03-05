@@ -34,6 +34,7 @@ export default class App extends Component {
         return Promise.all([notesRes.json(), foldersRes.json()]);
       })
       .then(([notes, folders]) => {
+        console.log(folders);
         this.setState({
           notes:notes, 
           folders:folders
@@ -42,6 +43,29 @@ export default class App extends Component {
       .catch(err => {
         console.log(`Handling the error here: ${err}`)
       })
+  }
+    // Method to add a new folder form submission - make POST request in here - called by AddFolder
+    // fetch request and then the API will give us an id. I will have to figure out how to pass the id back to??
+    handleSubmitFolder = folderName => {
+      fetch(`http://localhost:9090/folders`, {
+      method: 'POST',
+      headers: {
+          'content-type': 'application/json'
+      },
+      body: JSON.stringify({name:folderName})
+      })
+      .then(res => {
+        // success/error message?
+        console.log(res);
+        return res.json()
+      })
+      .then(response => {
+        console.log(response)
+        let newState = this.state.folders;
+        newState.push({name:folderName, id:response.id})
+        this.setState({folders: newState})
+      })
+      .catch(err => console.log(err))
   }
 
   // Called by in NoteItem
@@ -76,18 +100,15 @@ export default class App extends Component {
         console.log(error)
       })
   }
-  // Method to add a new folder form submission - make POST request in here - called by AddFolder
-  // fetch request and then the API will give us an id. I will have to figure out how to pass the id back to??
-  handleSubmitFolder = folderName => {
-    console.log(`Here is your folder: ${folderName}`)
-  }
+
 
   render() {
     // create value object from context here
     const contextValue = {
       folders: this.state.folders,
       notes: this.state.notes,
-      deleteNoteHandler: this.deleteNoteHandler
+      deleteNoteHandler: this.deleteNoteHandler, 
+      handleSubmitFolder: this.handleSubmitFolder
     }
     return (
       // Provider - Wrap everything up so that the descendents have access
