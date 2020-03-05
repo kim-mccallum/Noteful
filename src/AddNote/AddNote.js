@@ -20,6 +20,7 @@ export default class AddNote extends Component {
             [e.target.name]:e.target.value,
         })
     }
+    
     render() {
         // CREATE A LIST OF OPTIONS FROM THE FOLDERS
         return (
@@ -39,13 +40,19 @@ export default class AddNote extends Component {
                         {/* A SELECT MENU WITH ATTRIBUTES TO MATCH TO THE FOLDER ID -HARDCODE NOW BUT GET FOLDERS FROM CONTEXT AND MAP */}
                         <label>
                             Select a folder 
-                            <select>
-                                {/* <option name="folderId" value="111-222">Folder1</option>
-                                <option name="folderId">Folder2</option> */}
+                            <select onChange={this.inputHandler}>
                                 {context.folders.map(fldr => {
-                                    return `<option name=${fldr.id}>${fldr.name}</option>`
+                                    console.log(fldr)
+                                    return <option name={`${fldr.id}`} key={`${fldr.id}`}>{`${fldr.name}`}</option>
                                 })}
                             </select>
+                            {/* <select 
+                                multiple = {true}
+                                value= {
+                                    context.folders.map(fldr => fldr.name)                               
+                                }
+                            ></select> */}
+
                         </label>
 
                         {/* GET CURRENT TIME/DATE MODIFIED - LIKELY IN THE FUNCTION NOT HERE */}
@@ -77,6 +84,7 @@ export default class AddNote extends Component {
                                 this.props.routeProps.history.goBack()
                             }}>Cancel</button>
 
+                            {/* How about a listener and handler to add the date upon save?  */}
                             <button type="submit">Save Note</button>
                         </div>  
                     </form>
