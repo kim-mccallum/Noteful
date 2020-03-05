@@ -1,9 +1,6 @@
 
 .AddFolderItem{
   list-style: none;
-}
-
-.addFolderBtn {
   display: block;
   padding: 11px 22px;
   border: 1px solid gray;
@@ -12,5 +9,6 @@
   text-align: center;
   list-style: none;
   width: 100%;
-  } 
+  background: lightgray;
+}
 

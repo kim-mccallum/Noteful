@@ -7,7 +7,7 @@ export default function HomePage(props){
     return (
       <>
         <nav className="App_nav">
-          <SideNav folders={props.store.folders}/>
+          <SideNav />
         </nav>
         <main>
           <NoteList notes={props.store.notes}/>

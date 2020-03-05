@@ -102,7 +102,7 @@ export default class App extends Component {
               {/* Pass the props here as a component. Use a function that returns/renders a component */}
               {/* explicitly pass the props - "off autopilot" */}
               <Route exact path="/" component={routeProps => <HomePage routeProps={routeProps} store={this.state}/>} />
-              <Route path='/folder/:id' component={routeProps => <FolderPage routeProps={routeProps} store={this.state} />} />
+              <Route path='/folder/:id' component={routeProps => <FolderPage routeProps={routeProps} />} />
               <Route path='/note/:id' component={routeProps => <NotePage routeProps={routeProps} store={this.state} />}/>
               {/* ADD NEW ROUTES FOR ADDFOLDER AND ADDNOTE FORM VIEWS */}
               {/* Pass the functions to add folders/notes as props */}
