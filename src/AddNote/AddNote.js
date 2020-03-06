@@ -16,16 +16,9 @@ export default class AddNote extends Component {
         // This prints out all the folders not just the one I selected?!?
         console.log(e.target)
         // debugger;
-        if (e.target.name === 'folderId'){
-            this.setState({
-                [e.target.name]:e.target.key,
-            })
-        }
-        if (e.target.name !== 'folderId'){
-            this.setState({
-                [e.target.name]:e.target.value,
-            })
-        }
+        this.setState({
+            [e.target.name]:e.target.value,
+        })
     }
     
     render() {
@@ -47,9 +40,9 @@ export default class AddNote extends Component {
                         {/* A SELECT MENU WITH ATTRIBUTES TO MATCH TO THE FOLDER ID -HARDCODE NOW BUT GET FOLDERS FROM CONTEXT AND MAP */}
                         <label>
                             Select a folder 
-                            <select onChange={this.inputHandler} name='folderId'>
+                            <select onChange={this.inputHandler} name='folderId' value={this.state.folderId}>
                                 {context.folders.map(fldr => {
-                                    return <option name='folderId' key={`${fldr.id}`}>{`${fldr.name}`}</option>
+                                    return <option name='folderId' key={`${fldr.id}`} value={`${fldr.id}`}>{`${fldr.name}`}</option>
                                 })}
                             </select>
                             {/* <select 
