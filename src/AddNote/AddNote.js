@@ -7,18 +7,25 @@ export default class AddNote extends Component {
         this.state = {
             name: '',
             modified:'',
-            folderId:'',
+            folderId: '' ,
             content:''
         }
     }
 
-    // Controlled form - just changes state from input itself
     inputHandler = (e) => {
-        console.log('look at the target', e.target)
-        // use square brackets for dynamic key name - make the names match!
-        this.setState({
-            [e.target.name]:e.target.value,
-        })
+        // This prints out all the folders not just the one I selected?!?
+        console.log(e.target)
+        // debugger;
+        if (e.target.name === 'folderId'){
+            this.setState({
+                [e.target.name]:e.target.key,
+            })
+        }
+        if (e.target.name !== 'folderId'){
+            this.setState({
+                [e.target.name]:e.target.value,
+            })
+        }
     }
     
     render() {
@@ -40,10 +47,9 @@ export default class AddNote extends Component {
                         {/* A SELECT MENU WITH ATTRIBUTES TO MATCH TO THE FOLDER ID -HARDCODE NOW BUT GET FOLDERS FROM CONTEXT AND MAP */}
                         <label>
                             Select a folder 
-                            <select onChange={this.inputHandler}>
+                            <select onChange={this.inputHandler} name='folderId'>
                                 {context.folders.map(fldr => {
-                                    console.log(fldr)
-                                    return <option name={`${fldr.id}`} key={`${fldr.id}`}>{`${fldr.name}`}</option>
+                                    return <option name='folderId' key={`${fldr.id}`}>{`${fldr.name}`}</option>
                                 })}
                             </select>
                             {/* <select 
