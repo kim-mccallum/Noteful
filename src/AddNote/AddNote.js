@@ -13,7 +13,6 @@ export default class AddNote extends Component {
     }
 
     inputHandler = (e) => {
-        // This prints out all the folders not just the one I selected?!?
         console.log(e.target)
         // debugger;
         this.setState({
@@ -28,7 +27,6 @@ export default class AddNote extends Component {
                 {(context) => (
                 <div className="addNote">
                     <h2>Add Note</h2>
-                    {/* { error } */}
                     <form className="addNoteForm" onSubmit={(e) => {
                         e.preventDefault();
                         context.handleSubmitNote(
@@ -37,7 +35,7 @@ export default class AddNote extends Component {
                         )
                         this.props.routeProps.history.push('/')
                         }}>
-                        {/* A SELECT MENU WITH ATTRIBUTES TO MATCH TO THE FOLDER ID -HARDCODE NOW BUT GET FOLDERS FROM CONTEXT AND MAP */}
+                        {/* A SELECT MENU WITH ATTRIBUTES TO MATCH TO THE FOLDER ID */}
                         <label>
                             Select a folder 
                             <select onChange={this.inputHandler} name='folderId' value={this.state.folderId}>
@@ -45,16 +43,8 @@ export default class AddNote extends Component {
                                     return <option name='folderId' key={`${fldr.id}`} value={`${fldr.id}`}>{`${fldr.name}`}</option>
                                 })}
                             </select>
-                            {/* <select 
-                                multiple = {true}
-                                value= {
-                                    context.folders.map(fldr => fldr.name)                               
-                                }
-                            ></select> */}
 
                         </label>
-
-                        {/* GET CURRENT TIME/DATE MODIFIED - LIKELY IN THE FUNCTION NOT HERE */}
 
                         {/* NOTE NAME */}
                         <br></br>
@@ -79,11 +69,10 @@ export default class AddNote extends Component {
                             <button onClick={(e) => {
                                 // Stop the reload
                                 e.preventDefault();
-                                // send you back to the home URL 
+                                // send you back 
                                 this.props.routeProps.history.goBack()
                             }}>Cancel</button>
 
-                            {/* How about a listener and handler to add the date upon save?  */}
                             <button type="submit">Save Note</button>
                         </div>  
                     </form>

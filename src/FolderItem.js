@@ -1,12 +1,30 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import NotefulContext from './NotefulContext';
 import './FolderItem.css'
 
 export default function FolderItem(props){
+    // console.log(props)
     return (
-      <li className='FolderItem'>
-        {/* <NavLink exact to={`/folder/${props.folderName}`}>{props.folderName}</NavLink> */}
-        <NavLink to={`/folder/${props.id}`}>{props.name}</NavLink>
-      </li>
+      <NotefulContext.Consumer>
+        {(context) => (
+        <li className='FolderItem'>
+          {/* <NavLink exact to={`/folder/${props.folderName}`}>{props.folderName}</NavLink> */}
+          <NavLink to={`/folder/${props.id}`}>
+            {props.name}
+          </NavLink>
+          <NavLink to={`/`}>
+              <button className='deleteFldrBtn' onClick={() => {
+                    context.deleteFolderHandler(
+                      props.id
+                    )
+
+              }}>         
+                Delete
+              </button>
+          </NavLink>
+        </li>
+        )}
+        </NotefulContext.Consumer>
     )
 }

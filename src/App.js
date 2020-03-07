@@ -55,12 +55,11 @@ export default class App extends Component {
     body: JSON.stringify({name:folderName})
     })
     .then(res => {
-      // success/error message?
-      console.log(res);
+      // console.log(res);
       return res.json()
     })
     .then(response => {
-      console.log(response)
+      // console.log(response)
       let newState = this.state.folders;
       newState.push({name:folderName, id:response.id})
       this.setState({folders: newState})
@@ -78,6 +77,7 @@ export default class App extends Component {
     body: JSON.stringify({
       id: noteObject.id,
       name: noteObject.name,
+      // HOW DO I GET THE DATE? 
       modified: noteObject.modified,
       folderId: noteObject.folderId,
       content: noteObject.content
@@ -89,11 +89,10 @@ export default class App extends Component {
       return res.json()
     })
     .then(response => {
-      console.log(response)
-      // // THIS NEEDS TO CHANGE AS I'M PUSHING A WHOLE OBJECT
-      // let newState = this.state.notes;
-      // newState.push({name:folderName, id:response.id})
-      // this.setState({folders: newState})
+      // console.log(response)
+      let newState = this.state.notes;
+      newState.push(response)
+      this.setState({notes: newState})
     })
     .catch(err => console.log(err))
     }
@@ -129,6 +128,36 @@ export default class App extends Component {
       })
   }
 
+  deleteFolderHandler = (folderId) => {
+    console.log('delete this one: ', folderId)
+    fetch(`http://localhost:9090/folders/${folderId}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json',
+      }
+      })
+      .then(res => {
+        if (!res.ok) {
+          // get the error message from the response,
+          return res.json().then(error => {
+            // then throw it
+            throw error
+          })
+        }
+        return res.json()
+      })
+      .then(data => {
+        // logic to delete - Later make the fn handle notes and folders - If it's a note do one thing, if it's a folder do the other
+        const newFolders = this.state.folders.filter(folder =>
+          folder.id !== folderId)
+        this.setState({
+          folders: newFolders
+        })
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
 
   render() {
     // create value object from context here
@@ -136,6 +165,7 @@ export default class App extends Component {
       folders: this.state.folders,
       notes: this.state.notes,
       deleteNoteHandler: this.deleteNoteHandler, 
+      deleteFolderHandler: this.deleteFolderHandler, 
       handleSubmitFolder: this.handleSubmitFolder,
       handleSubmitNote: this.handleSubmitNote
     }

@@ -1,11 +1,13 @@
 import React from 'react';
+import './NotePageSideNav.css'
 
 export default function NotePageSideNav(props){
     return (
         <nav className='NotePage_SideNav'>
-            <h1>{props.folderName}</h1>
+            <h1>Folder: </h1>
+            <h2>{props.folderName}</h2>
 
-            <button onClick={()=> props.routeProps.history.goBack()} >
+            <button className="notePageGoBack" onClick={()=> props.routeProps.history.goBack()} >
             Go Back
             </button>
 

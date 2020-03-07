@@ -7,8 +7,6 @@ export default function FolderPage(props){
     // Use the match params to get the id
     const routePath = props.routeProps.match.params.id;
     // Find the note with a folderId that matches the routePah
-    // const notes = props.store.notes.filter(note => note.folderId === routePath);
-
     const notes = useContext(NotefulContext).notes.filter(note => note.folderId === routePath);
     return (
       <>
