@@ -1,10 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import NotefulContext from './NotefulContext';
+import PropTypes from 'prop-types'
 import './FolderItem.css'
 
 export default function FolderItem(props){
-    // console.log(props)
+    console.log(props)
     return (
       <NotefulContext.Consumer>
         {(context) => (
@@ -18,7 +19,6 @@ export default function FolderItem(props){
                     context.deleteFolderHandler(
                       props.id
                     )
-
               }}>         
                 Delete
               </button>
@@ -27,4 +27,9 @@ export default function FolderItem(props){
         )}
         </NotefulContext.Consumer>
     )
+}
+
+PropTypes.FolderItem = { 
+  name: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired
 }
