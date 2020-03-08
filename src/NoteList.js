@@ -22,5 +22,5 @@ export default function NoteList(props){
 }
 
 NoteList.propTypes = {
-  value: PropTypes.array.isRequired
+  notes: PropTypes.array.isRequired
 };

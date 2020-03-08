@@ -11,10 +11,12 @@ export default function FolderPage(props){
     return (
       <>
         <nav className="App_nav">
-          {/* <SideNav folders={props.store.folders} selectedFolder={folderName}/> */}
-          <SideNav folders={useContext(NotefulContext).folders} selectedFolder={routePath}/>
+          {/* WHEN I TAKE OUT THE routePath HOW DOES IT KNOW WHICH FOLDER IS ACTIVE?  */}
+          {/* <SideNav selectedFolder={routePath}/> */}
+          <SideNav />
         </nav>
           <NoteList notes={notes}/>
       </>
     )
 }
+
