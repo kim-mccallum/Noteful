@@ -12,6 +12,8 @@ export default function HomePage(props){
         </nav>
         <main>
           <NoteList notes={props.store.notes}/>
+          {/* Try to see if the PropTypes is working?  */}
+          {/* <NoteList notes={'props.store.notes'}/> */}
         </main>
       </>
     )

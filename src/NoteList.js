@@ -1,6 +1,7 @@
 import React from 'react';
 import NoteItem from './NoteItem';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import './NoteList.css';
 
 export default function NoteList(props){
@@ -19,3 +20,7 @@ export default function NoteList(props){
       </section>
     )
 }
+
+NoteList.propTypes = {
+  value: PropTypes.array.isRequired
+};

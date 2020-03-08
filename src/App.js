@@ -172,7 +172,7 @@ export default class App extends Component {
     }
     return (
       <NotefulError>
-      // Provider - Wrap everything up so that the descendents have access
+      {/* // Provider - Wrap everything up so that the descendents have access */}
       <NotefulContext.Provider
         value={contextValue}>
         <div className='App'>
