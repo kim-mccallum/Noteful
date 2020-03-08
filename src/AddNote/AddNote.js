@@ -29,7 +29,7 @@ export default class AddNote extends Component {
     inputHandler = (e) => {
         // use square brackets for dynamic key name
         this.setState({[e.target.name]: {
-            value: e.target.value, touched:true}
+            value: e.target.value, touched: true}
         })
     }
 
@@ -67,12 +67,11 @@ export default class AddNote extends Component {
                         {/* IF YOU GET HERE FROM THE FOLDER PAGE, CAN I GET THE FOLDER NAME TO USE AS A DEFAULT VALUES?  */}
                         <label>
                             Select a folder 
-                            <select onChange={this.inputHandler} name='folderId' value={this.state.folderId}>
+                            <select onChange={this.inputHandler} name='folderId' value={this.state.folderId.value}>
                                 {context.folders.map(fldr => {
                                     return <option name='folderId' key={`${fldr.id}`} value={`${fldr.id}`}>{`${fldr.name}`}</option>
                                 })}
                             </select>
-
                         </label>
 
                         {/* NOTE NAME */}

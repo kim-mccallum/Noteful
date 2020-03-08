@@ -1,6 +1,7 @@
 import React from 'react';
 import SideNav from './SideNav';
 import NoteList from './NoteList';
+
 import './HomePage.css'
 
 export default function HomePage(props){

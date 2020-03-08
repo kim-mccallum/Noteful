@@ -76,11 +76,11 @@ export default class App extends Component {
     // Change this to get all the attributes
     body: JSON.stringify({
       id: noteObject.id,
-      name: noteObject.name,
+      name: noteObject.name.value,
       // HOW DO I GET THE DATE? 
-      modified: noteObject.modified,
-      folderId: noteObject.folderId,
-      content: noteObject.content
+      modified: noteObject.modified.value,
+      folderId: noteObject.folderId.value,
+      content: noteObject.content.value
     })
     })
     .then(res => {
@@ -89,7 +89,7 @@ export default class App extends Component {
       return res.json()
     })
     .then(response => {
-      // console.log(response)
+      console.log(response)
       let newState = this.state.notes;
       newState.push(response)
       this.setState({notes: newState})

@@ -1,6 +1,7 @@
 import React from 'react';
 import NotePageSideNav from './NotePageSideNav';
 import NotefulContext from './NotefulContext';
+import BrokenComponent from './BrokenComponent';
 import './NotePage.css'
 
 export default function NotePage(props){
@@ -35,6 +36,7 @@ export default function NotePage(props){
             Delete
           </button>
           <p className="Note_text">{note ? note.content: ''}</p>
+          <BrokenComponent />
         </section>       
       </>
     )}
