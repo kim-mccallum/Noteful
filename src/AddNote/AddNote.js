@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import NotefulContext from '../NotefulContext';
 
 export default class AddNote extends Component {
+    // Refactor this so that each property also has a 'touched' property
     constructor(props){
         super(props);
         this.state = {
@@ -13,8 +14,6 @@ export default class AddNote extends Component {
     }
 
     inputHandler = (e) => {
-        console.log(e.target)
-        // debugger;
         this.setState({
             [e.target.name]:e.target.value,
         })
@@ -36,6 +35,7 @@ export default class AddNote extends Component {
                         this.props.routeProps.history.push('/')
                         }}>
                         {/* A SELECT MENU WITH ATTRIBUTES TO MATCH TO THE FOLDER ID */}
+                        {/* IF YOU GET HERE FROM THE FOLDER PAGE, CAN I GET THE FOLDER NAME TO USE AS A DEFAULT VALUES?  */}
                         <label>
                             Select a folder 
                             <select onChange={this.inputHandler} name='folderId' value={this.state.folderId}>

@@ -19,7 +19,6 @@ export default class AddFolder extends Component {
 
     validateName(){
         const name = this.state.folderName.value.trim();
-        console.log(name)
         if (name.length === 0){
             return "Folder name is required";
         } 
@@ -27,6 +26,7 @@ export default class AddFolder extends Component {
 
    render() {
     const nameError = this.validateName();
+    console.log(nameError)
     return (
             <NotefulContext.Consumer>
                 {(context) => (
@@ -59,7 +59,7 @@ export default class AddFolder extends Component {
                                 this.props.routeProps.history.goBack()
                             }}>Cancel</button>
 
-                            <button type="submit" >Save</button>
+                            <button type="submit" disabled={!this.state.folderName.touched || nameError}>Save</button>
                         </div>  
                     </form>
                 </div>
