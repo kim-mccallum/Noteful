@@ -8,6 +8,7 @@ import AddFolder from './AddFolder/AddFolder';
 import AddNote from './AddNote/AddNote';
 import NotFoundPage from './NotFoundPage';
 import NotefulContext from './NotefulContext';
+import NotefulError from './NotefulError';
 import './App.css'
 
 export default class App extends Component {
@@ -170,6 +171,7 @@ export default class App extends Component {
       handleSubmitNote: this.handleSubmitNote
     }
     return (
+      <NotefulError>
       // Provider - Wrap everything up so that the descendents have access
       <NotefulContext.Provider
         value={contextValue}>
@@ -193,6 +195,7 @@ export default class App extends Component {
           </>
         </div>
       </NotefulContext.Provider>
+      </NotefulError>
     )
   }
 }
