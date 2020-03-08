@@ -1,26 +1,55 @@
 import React, { Component } from 'react'
 import NotefulContext from '../NotefulContext';
+import ValidationError from '../ValidationError'
 
 export default class AddNote extends Component {
     // Refactor this so that each property also has a 'touched' property
     constructor(props){
         super(props);
         this.state = {
-            name: '',
-            modified:'',
-            folderId: '' ,
-            content:''
+            name: {
+                value:'',
+                touched: false
+            },
+            modified:{
+                value:'',
+                touched: false
+            },
+            folderId: {
+                value:'',
+                touched: false
+            } ,
+            content:{
+                value:'',
+                touched: false
+            }
         }
     }
 
     inputHandler = (e) => {
-        this.setState({
-            [e.target.name]:e.target.value,
+        // use square brackets for dynamic key name
+        this.setState({[e.target.name]: {
+            value: e.target.value, touched:true}
         })
+    }
+
+    validateName(){
+        const name = this.state.name.value.trim();
+        if (name.length === 0){
+            return "Note name is required";
+        } 
+    }
+
+    validateContent(){
+        const content = this.state.content.value.trim();
+        if (content.length === 0){
+            return "Notes cannot be empty";
+        } 
     }
     
     render() {
-        // CREATE A LIST OF OPTIONS FROM THE FOLDERS
+        const nameError = this.validateName();
+        const contentError = this.validateContent();
         return (
             <NotefulContext.Consumer>
                 {(context) => (
@@ -55,7 +84,7 @@ export default class AddNote extends Component {
                             id="name" 
                             placeholder="note name"
                             onChange={this.inputHandler}/>
-
+                        {this.state.name.touched && <ValidationError message={nameError} />}
                         {/* TEXTAREA FOR THE NOTE ITSELF */}
                         <label>
                             Note text:
@@ -63,6 +92,7 @@ export default class AddNote extends Component {
                                 name="content" 
                                 placeholder="type note here"
                                 onChange={this.inputHandler} />
+                                {this.state.content.touched && <ValidationError message={contentError} />}
                         </label>
 
                         <div className="addNoteBtn">
@@ -73,7 +103,10 @@ export default class AddNote extends Component {
                                 this.props.routeProps.history.goBack()
                             }}>Cancel</button>
 
-                            <button type="submit">Save Note</button>
+                            <button 
+                                type="submit"
+                                disabled={!this.state.name.touched || nameError || !this.state.content.touched || contentError} 
+                            >Save Note</button>
                         </div>  
                     </form>
                 </div>
