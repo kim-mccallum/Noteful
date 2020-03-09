@@ -11,10 +11,6 @@ export default class AddNote extends Component {
                 value:'',
                 touched: false
             },
-            modified:{
-                value:'',
-                touched: false
-            },
             folderId: {
                 value:'',
                 touched: false

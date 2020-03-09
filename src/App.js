@@ -78,15 +78,12 @@ export default class App extends Component {
     body: JSON.stringify({
       id: noteObject.id,
       name: noteObject.name.value,
-      // HOW DO I GET THE DATE? 
-      modified: noteObject.modified.value,
+      modified: new Date(),
       folderId: noteObject.folderId.value,
       content: noteObject.content.value
     })
     })
     .then(res => {
-      // success/error message?
-      console.log(res);
       return res.json()
     })
     .then(response => {
