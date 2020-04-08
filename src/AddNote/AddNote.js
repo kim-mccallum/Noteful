@@ -59,8 +59,6 @@ export default class AddNote extends Component {
                         )
                         this.props.routeProps.history.push('/')
                         }}>
-                        {/* A SELECT MENU WITH ATTRIBUTES TO MATCH TO THE FOLDER ID */}
-                        {/* IF YOU GET HERE FROM THE FOLDER PAGE, CAN I GET THE FOLDER NAME TO USE AS A DEFAULT VALUES?  */}
                         <label>
                             Select a folder 
                             <select onChange={this.inputHandler} name='folderId' value={this.state.folderId.value}>

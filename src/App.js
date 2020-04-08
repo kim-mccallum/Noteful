@@ -93,7 +93,8 @@ export default class App extends Component {
       id: noteObject.id,
       name: noteObject.name.value,
       modified: new Date(),
-      folderId: noteObject.folderId.value,
+      folderid: noteObject.folderId.value,
+      // folderId: noteObject.folderId.value,
       content: noteObject.content.value
     })
     })
@@ -118,22 +119,16 @@ export default class App extends Component {
       }
       })
       .then(res => {
-        if (!res.ok) {
-          // get the error message from the response,
-          return res.json().then(error => {
-            // then throw it
-            throw error
+          if (!res.ok) {
+              return res.json().then(error => {
+                  throw error
+              });
+          }
+      
+          const newNotes = this.state.notes.filter(note => note.id !== noteId);
+          this.setState({
+              notes: newNotes
           })
-        }
-        return res.json()
-      })
-      .then(data => {
-        // logic to delete - Later make the fn handle notes and folders - If it's a note do one thing, if it's a folder do the other
-        const newNotes = this.state.notes.filter(note =>
-          note.id !== noteId)
-        this.setState({
-          notes: newNotes
-        })
       })
       .catch(error => {
         console.log(error)
@@ -156,7 +151,7 @@ export default class App extends Component {
             throw error
           })
         }
-        return res.json()
+        // return res.json()
       })
       .then(data => {
         // logic to delete - Later make the fn handle notes and folders - If it's a note do one thing, if it's a folder do the other
