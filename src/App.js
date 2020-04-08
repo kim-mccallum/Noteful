@@ -56,7 +56,8 @@ export default class App extends Component {
       id: note.id, 
       name: note.name,
       content: note.content, 
-      folderId: note.folderid
+      folderId: note.folderid,
+      modified: note.modified
     }
   }
 
@@ -83,6 +84,7 @@ export default class App extends Component {
     }
   // Method to add a new folder form submission - make POST request in here - called by AddFolder
   handleSubmitNote = noteObject => {
+    console.log(noteObject)
     fetch(`${config.API_ENDPOINT}/notes`, {
     method: 'POST',
     headers: {
@@ -94,18 +96,23 @@ export default class App extends Component {
       name: noteObject.name.value,
       modified: new Date(),
       folderid: noteObject.folderId.value,
-      // folderId: noteObject.folderId.value,
       content: noteObject.content.value
     })
     })
     .then(res => {
       return res.json()
     })
-    .then(response => {
-      console.log(response)
-      let newState = this.state.notes;
-      newState.push(response)
-      this.setState({notes: newState})
+    // .then(response => {
+    //   console.log(response)
+    //   let newState = this.state.notes;
+    //   newState.push(response)
+    //   this.setState({notes: newState})
+    // })
+    .then(newNote => {
+      console.log(newNote)
+      this.setState({
+        notes: [...this.state.notes, this.serializeNote(newNote)]
+      })
     })
     .catch(err => console.log(err))
     }

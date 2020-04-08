@@ -61,11 +61,11 @@ export default class AddNote extends Component {
                         }}>
                         <label>
                             Select a folder 
-                            <select onChange={this.inputHandler} name='folderId' value={this.state.folderId.value}>
-                                {context.folders.map(fldr => {
-                                    return <option name='folderId' key={`${fldr.id}`} value={`${fldr.id}`}>{`${fldr.name}`}</option>
-                                })}
-                            </select>
+                        <select onChange={this.inputHandler} name='folderId' value={this.state.folderId.value}>
+                            {context.folders.map(fldr => {
+                                return <option name='folderId' key={`${fldr.id}`} value={`${fldr.id}`}>{`${fldr.name}`}</option>
+                            })}
+                        </select>
                         </label>
 
                         {/* NOTE NAME */}
