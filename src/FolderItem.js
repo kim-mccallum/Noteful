@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import './FolderItem.css'
 
 export default function FolderItem(props){
-    console.log(props)
+    // console.log(props)
     return (
       <NotefulContext.Consumer>
         {(context) => (

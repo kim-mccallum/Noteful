@@ -9,7 +9,8 @@ import AddNote from './AddNote/AddNote';
 import NotFoundPage from './NotFoundPage';
 import NotefulContext from './NotefulContext';
 import NotefulError from './NotefulError';
-import './App.css'
+import './App.css';
+import config from './config';
 
 export default class App extends Component {
   state = {
@@ -20,8 +21,8 @@ export default class App extends Component {
   // Get the data from the API and use setState to reset
   componentDidMount() {
       // Implement 2 fetch request to 2 endpoints 
-      const folderURL = 'http://localhost:9090/folders'
-      const noteURL = 'http://localhost:9090/notes'
+      const folderURL = `${config.API_ENDPOINT}/folders`
+      const noteURL = `${config.API_ENDPOINT}/notes`
       Promise.all([
         fetch(noteURL),
         fetch(folderURL),
@@ -37,6 +38,8 @@ export default class App extends Component {
       })
       .then(([notes, folders]) => {
         // console.log(folders);
+        notes = notes.map(this.serializeNote);
+        console.log(notes)
         this.setState({
           notes:notes, 
           folders:folders
@@ -46,9 +49,20 @@ export default class App extends Component {
         console.log(`Handling the error here: ${err}`)
       })
   }
+
+  //Method to fix the note attribute names
+  serializeNote = note => {
+    return { 
+      id: note.id, 
+      name: note.name,
+      content: note.content, 
+      folderId: note.folderid
+    }
+  }
+
   // Method to add a new folder form submission - make POST request in here - called by AddFolder
   handleSubmitFolder = folderName => {
-    fetch(`http://localhost:9090/folders`, {
+    fetch(`${config.API_ENDPOINT}/folders`, {
     method: 'POST',
     headers: {
         'content-type': 'application/json'
@@ -69,7 +83,7 @@ export default class App extends Component {
     }
   // Method to add a new folder form submission - make POST request in here - called by AddFolder
   handleSubmitNote = noteObject => {
-    fetch(`http://localhost:9090/notes`, {
+    fetch(`${config.API_ENDPOINT}/notes`, {
     method: 'POST',
     headers: {
         'content-type': 'application/json'
@@ -97,7 +111,7 @@ export default class App extends Component {
 
   // Called by in NoteItem
   deleteNoteHandler = noteId => {
-    fetch(`http://localhost:9090/notes/${noteId}`, {
+    fetch(`${config.API_ENDPOINT}/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json',
@@ -128,7 +142,7 @@ export default class App extends Component {
 
   deleteFolderHandler = (folderId) => {
     console.log('delete this one: ', folderId)
-    fetch(`http://localhost:9090/folders/${folderId}`, {
+    fetch(`${config.API_ENDPOINT}/folders/${folderId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json',
