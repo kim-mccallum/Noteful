@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import './NoteList.css';
 
 export default function NoteList(props){
+    // console.log(props.notes)
     const notes = props.notes.map((note) => {
       return <NoteItem className="noteItem" note={note} key={note.id}/>
     })

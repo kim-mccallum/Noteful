@@ -20,7 +20,6 @@ export default class App extends Component {
 
   // Get the data from the API and use setState to reset
   componentDidMount() {
-      // Implement 2 fetch request to 2 endpoints 
       const folderURL = `${config.API_ENDPOINT}/folders`
       const noteURL = `${config.API_ENDPOINT}/notes`
       Promise.all([
@@ -37,9 +36,7 @@ export default class App extends Component {
         return Promise.all([notesRes.json(), foldersRes.json()]);
       })
       .then(([notes, folders]) => {
-        // console.log(folders);
         notes = notes.map(this.serializeNote);
-        console.log(notes)
         this.setState({
           notes:notes, 
           folders:folders
@@ -49,8 +46,7 @@ export default class App extends Component {
         console.log(`Handling the error here: ${err}`)
       })
   }
-
-  //Method to fix the note attribute names
+  //Method to fix the note attribute names for the DB
   serializeNote = note => {
     return { 
       id: note.id, 
@@ -71,11 +67,9 @@ export default class App extends Component {
     body: JSON.stringify({name:folderName})
     })
     .then(res => {
-      // console.log(res);
       return res.json()
     })
     .then(response => {
-      // console.log(response)
       let newState = this.state.folders;
       newState.push({name:folderName, id:response.id})
       this.setState({folders: newState})
@@ -90,7 +84,6 @@ export default class App extends Component {
     headers: {
         'content-type': 'application/json'
     },
-    // Change this to get all the attributes
     body: JSON.stringify({
       id: noteObject.id,
       name: noteObject.name.value,
@@ -102,12 +95,6 @@ export default class App extends Component {
     .then(res => {
       return res.json()
     })
-    // .then(response => {
-    //   console.log(response)
-    //   let newState = this.state.notes;
-    //   newState.push(response)
-    //   this.setState({notes: newState})
-    // })
     .then(newNote => {
       console.log(newNote)
       this.setState({
@@ -131,7 +118,6 @@ export default class App extends Component {
                   throw error
               });
           }
-      
           const newNotes = this.state.notes.filter(note => note.id !== noteId);
           this.setState({
               notes: newNotes
@@ -152,16 +138,12 @@ export default class App extends Component {
       })
       .then(res => {
         if (!res.ok) {
-          // get the error message from the response,
           return res.json().then(error => {
-            // then throw it
             throw error
           })
         }
-        // return res.json()
       })
       .then(data => {
-        // logic to delete - Later make the fn handle notes and folders - If it's a note do one thing, if it's a folder do the other
         const newFolders = this.state.folders.filter(folder =>
           folder.id !== folderId)
         this.setState({
@@ -174,7 +156,7 @@ export default class App extends Component {
   }
 
   render() {
-    // create value object from context here
+    // create value object from context here 
     const contextValue = {
       folders: this.state.folders,
       notes: this.state.notes,
@@ -183,6 +165,7 @@ export default class App extends Component {
       handleSubmitFolder: this.handleSubmitFolder,
       handleSubmitNote: this.handleSubmitNote
     }
+
     return (
       <NotefulError>
       {/* // Provider - Wrap everything up so that the descendents have access */}

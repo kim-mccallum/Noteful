@@ -4,7 +4,6 @@ import NotefulContext from './NotefulContext';
 import './NoteItem.css'
 
 function NoteItem(props) {
-    // const date = props.note.modified.split('T')[0]
     const date = new Date(props.note.modified).toDateString() 
     return (
       <NotefulContext.Consumer>
