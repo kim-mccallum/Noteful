@@ -42,10 +42,18 @@ export default class AddNote extends Component {
             return "Notes cannot be empty";
         } 
     }
+    // not working yet
+    validateFolderId(){
+        const folderId = this.state.folderId.value.trim();
+        if (folderId.length === 0){
+            return "Please select a folder from the list";
+        } 
+    }
     
     render() {
         const nameError = this.validateName();
         const contentError = this.validateContent();
+        const folderError = this.validateFolderId();
         return (
             <NotefulContext.Consumer>
                 {(context) => (
@@ -54,22 +62,23 @@ export default class AddNote extends Component {
                     <form className="addNoteForm" onSubmit={(e) => {
                         e.preventDefault();
                         context.handleSubmitNote(
-                            // Pass the entire state object?
                             this.state
                         )
                         this.props.routeProps.history.push('/')
                         }}>
                         <label>
                             Select a folder 
-                            <select onChange={this.inputHandler} name='folderId' value={this.state.folderId.value}>
-                            {/* <select onChange={this.inputHandler} name='folderId' value={this.state.folderId.value || (context.folders[0] || {}).id}>  */}
-                                {context.folders.map(fldr => {
-                                    return <option name='folderId' key={`${fldr.id}`} value={`${fldr.id}`}>{`${fldr.name}`}</option>
-                                })}
+                            <select onChange={this.inputHandler} name='folderId' value={this.state.folderId.value}>        
+                            {/* <option selected="selected" value="Please select a folder">Please select a folder</option> */}
+                            <option value="" selected disabled hidden>Choose here</option>
+                            {context.folders.map(fldr => {
+                                return <option name='folderId' key={`${fldr.id}`} value={`${fldr.id}`}>{`${fldr.name}`}</option>
+                            })}
                             </select>
+                            {/* THIS ISN'T WORKING HOW I WANT */}
+                            {this.state.folderId.touched && <ValidationError message={folderError} />} 
                         </label>
 
-                        {/* NOTE NAME */}
                         <br></br>
                         <label htmlFor="name">Note name:</label>
                         <input 
@@ -99,7 +108,11 @@ export default class AddNote extends Component {
 
                             <button 
                                 type="submit"
-                                disabled={!this.state.name.touched || nameError || !this.state.content.touched || contentError} 
+                                disabled={
+                                    !this.state.folderId.touched || folderError ||
+                                    !this.state.name.touched || nameError || 
+                                    !this.state.content.touched || contentError
+                                } 
                             >Save Note</button>
                         </div>  
                     </form>

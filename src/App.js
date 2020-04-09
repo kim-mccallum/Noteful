@@ -144,10 +144,14 @@ export default class App extends Component {
         }
       })
       .then(data => {
+        // add another filter here to only keep the notes not tied to that folder
+        const newNotes = this.state.notes.filter(note => 
+          note.folderId !== folderId)
         const newFolders = this.state.folders.filter(folder =>
           folder.id !== folderId)
         this.setState({
-          folders: newFolders
+          folders: newFolders,
+          notes: newNotes
         })
       })
       .catch(error => {
